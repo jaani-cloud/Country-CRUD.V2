@@ -1,5 +1,6 @@
 
 using App.Services.Countries;
+using App.Services.States;
 using Infra.Data;
 using Infra.Repos.Classes;
 using Infra.Repos.Interfaces;
@@ -26,6 +27,7 @@ namespace API
             builder.Services.AddScoped<ICountryRepo, CountryRepo>();
             builder.Services.AddScoped<ICountryService, CountryService>();
             builder.Services.AddScoped<IStateRepo, StateRepo>();
+            builder.Services.AddScoped<IStateService, StateService>();
 
             var app = builder.Build();
 
