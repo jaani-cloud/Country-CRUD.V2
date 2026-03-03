@@ -28,12 +28,12 @@ public class StateRepo : IStateRepo
 
     public async Task<List<State>> GetAll()
     {
-        return await _context.States.ToListAsync();
+        return await _context.States.Include(x => x.Country).ToListAsync();
     }
 
     public async Task<State?> GetById(int id)
     {
-        return await _context.States.FindAsync(id); 
+        return await _context.States.Include(x => x.Country).FirstOrDefaultAsync(i => id == i.Id); 
     }
 
     public async Task Upate(State state)
