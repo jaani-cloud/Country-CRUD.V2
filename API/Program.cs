@@ -1,4 +1,5 @@
 
+using App.Services.Countries;
 using Infra.Data;
 using Infra.Repos.Classes;
 using Infra.Repos.Interfaces;
@@ -23,6 +24,7 @@ namespace API
             builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
             builder.Services.AddScoped<ICountryRepo, CountryRepo>();
+            builder.Services.AddScoped<ICountryService, CountryService>();
 
             var app = builder.Build();
 
