@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
 
-namespace Infra.Repos.Interfaces
+namespace Infra.Repos.Interfaces;
+
+public interface IStateRepo
 {
-    internal interface IStateRepo
-    {
-    }
+    public Task Add(State state);
+    public Task<List<State>> GetAll();
+    public Task Upate(State state);
+    public Task<State?> GetById(int id); 
+    public Task Delete(State state); 
 }
