@@ -28,7 +28,7 @@ public class StateService : IStateService
         State state = new State
         {
             Name = input.Name,
-            CountryId = country.Id,
+            CountryId = input.CountryId,
         };
         await _stateRepo.Add(state);
     }
@@ -50,6 +50,7 @@ public class StateService : IStateService
 
         return states.Select(state => new StateResponseDto
         {
+            Id = state.Id,
             Name = state.Name,
             CountryId = state.CountryId,
             Country = new ResponseCountryDto
@@ -60,12 +61,18 @@ public class StateService : IStateService
         }).ToList();
     }
 
-    public async Task<StateResponseDto> GetById(int id)
+    public async Task<StateResponseDto?> GetById(int id)
     {
         var state = await _stateRepo.GetById(id);
 
+        if (state == null)
+        {
+            return null;
+        }
+
         return new StateResponseDto
         {
+            Id = state.Id,
             Name = state.Name,
             CountryId = state.CountryId,
             Country = new ResponseCountryDto
@@ -85,12 +92,17 @@ public class StateService : IStateService
             return;
         }
 
-        var country = _countryRepo.GetById(id);
+        var country = _countryRepo.GetById(input.CountryId);
 
         if (country == null)
         {
             return;
         }
+
+        state.Name = input.Name;
+        state.CountryId = input.CountryId;
+
+        await _stateRepo.Update(state);
 
     }
 }

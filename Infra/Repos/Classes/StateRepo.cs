@@ -36,7 +36,7 @@ public class StateRepo : IStateRepo
         return await _context.States.Include(x => x.Country).FirstOrDefaultAsync(i => id == i.Id); 
     }
 
-    public async Task Upate(State state)
+    public async Task Update(State state)
     {
         _context.States.Update(state);
         await _context.SaveChangesAsync();

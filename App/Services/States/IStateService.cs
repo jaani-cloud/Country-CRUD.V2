@@ -8,5 +8,5 @@ public interface IStateService
     public Task Update(StateCreateUpdateDto input, int id);
     public Task Delete(int id);
     public Task<List<StateResponseDto>> GetAll();
-    public Task<StateResponseDto> GetById(int id);
+    public Task<StateResponseDto?> GetById(int id);
 }
